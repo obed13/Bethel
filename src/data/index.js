@@ -14,14 +14,14 @@ export const SERVICES = [
     title: "Oración",
     schedule: "Lunes 07:00 p.m.",
     scheduleIcon: "clock",
-    desc: "Formación integral para el desarrollo de dones y liderazgo ministerial.",
+    desc: "Un tiempo de adoración y orando por nuestras familias.",
   },
   {
     icon: "church",
     title: "Servicio de Enseñanza",
     schedule: "Miércoles 07:00 p.m.",
     scheduleIcon: "clock",
-    desc: "Un tiempo dinámico de adoración y palabra relevante para la nueva generación.",
+    desc: "Aprendiendo palabra de Dios y conociendolo mas.",
   },
   {
     icon: "heart",
@@ -35,7 +35,7 @@ export const SERVICES = [
     title: "Culto de Varones",
     schedule: "3er Viernes 07:00 p.m.",
     scheduleIcon: "clock",
-    desc: "Grupos en casas para compartir, orar y crecer juntos en hermandad.",
+    desc: "Espacio de comunión y empoderamiento para hombres de fe.",
   },
 ];
 

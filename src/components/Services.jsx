@@ -27,7 +27,7 @@ const FeaturedServiceCard = () => (
         >
           <Icon name="sun" size={24} />
         </div>
-        <h3 className="text-2xl font-semibold mb-2 tracking-tight">Servicio General</h3>
+        <h3 className="text-2xl font-semibold mb-2 tracking-tight">Servicio Dominical</h3>
         <p className="flex items-center gap-2 font-medium text-slate-300 mb-4">
           <Icon name="clock" size={16} /> Domingo 10:30 a.m.
         </p>
