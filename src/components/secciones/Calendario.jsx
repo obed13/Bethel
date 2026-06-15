@@ -151,8 +151,8 @@ const Calendario = () => {
   const today    = new Date();
   const todayStr = fmtDate(today);
 
-  const [viewYear,  setViewYear]  = useState(2026);
-  const [viewMonth, setViewMonth] = useState(4);          // Mayo
+  const [viewYear,  setViewYear]  = useState(today.getFullYear());
+  const [viewMonth, setViewMonth] = useState(today.getMonth());          // Mayo
   const [selected,  setSelected]  = useState(todayStr);
   const [filter,    setFilter]    = useState("todos");
 
