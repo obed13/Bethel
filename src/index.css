@@ -1,0 +1,36 @@
+@import "tailwindcss";
+
+@theme {
+
+  --breakpoint-xs: 320px;
+  --breakpoint-sd: 375px;
+  --breakpoint-ms: 425px;
+  --breakpoint-sm: 640px;    /* mantener el original */
+  --breakpoint-md: 768px;    /* mantener el original */
+  --breakpoint-lg: 1024px;   /* mantener el original */
+  --breakpoint-xl: 1366px;   /* sobrescribe el original */
+  --breakpoint-2xl: 1536px;  /* mantener el original */
+
+  /* ── Azules principales ─────────────────── */
+  --color-brand-900:   #0D3B7A;
+  --color-brand-800:   #1045A1;
+  --color-brand-700:   #1254BF;
+  --color-brand-DEFAULT: #1565C0;   /* primario */
+  --color-brand-500:   #1976D2;
+  --color-brand-400:   #1E88E5;     /* medio */
+  --color-brand-300:   #42A5F5;     /* claro */
+  --color-brand-200:   #90CAF9;
+  --color-brand-100:   #BBDEFB;     /* pálido */
+  --color-brand-50:    #E3F2FD;
+
+  /* ── Acento ámbar ───────────────────────── */
+  --color-accent-DEFAULT: #FF8F00;
+  --color-accent-600:     #E65100;
+  --color-accent-400:     #FFA000;
+  --color-accent-100:     #FFF8E1;
+
+  /* ── Neutros ────────────────────────────── */
+  --color-surface:        #F0F4F8;
+  --color-ink:            #37474F;
+  --color-ink-muted:      #607D8B;
+}
