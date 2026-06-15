@@ -14,7 +14,7 @@ const Welcome = () => (
             className="relative rounded-2xl shadow-xl z-10 w-full object-cover"
             style={{ height: 500, filter: "grayscale(0.2)" }}
           />
-          <div className="absolute -bottom-6 -right-6 bg-white p-4 rounded-xl shadow-lg z-20 max-w-[200px] border border-slate-100 hidden md:block">
+          <div className="absolute -bottom-6 -right-6 bg-white p-4 rounded-xl shadow-lg z-20 max-w-50 border border-slate-100 hidden md:block">
             <div className="flex items-center gap-3">
               <div className="w-10 h-10 rounded-full bg-slate-100 text-slate-950 flex items-center justify-center">
                 <Icon name="heart" size={24} />
@@ -46,7 +46,7 @@ const Welcome = () => (
             </span>
           </h2>
           <p className="text-slate-600 leading-relaxed font-light">
-            En CFC Bethel, llevamos más de una décadas sirviendo a nuestra comunidad y
+            En CFC Bethel, llevamos más de una década sirviendo a nuestra comunidad y
             expandiendo el mensaje de esperanza en la nación. Creemos en una iglesia activa,
             acogedora y relevante para los tiempos actuales.
           </p>

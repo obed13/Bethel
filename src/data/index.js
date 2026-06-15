@@ -11,7 +11,7 @@ export const NAV_LINKS = [
 export const SERVICES = [
   {
     icon: "globe",
-    title: "Oracion",
+    title: "Oración",
     schedule: "Lunes 07:00 p.m.",
     scheduleIcon: "clock",
     desc: "Formación integral para el desarrollo de dones y liderazgo ministerial.",
@@ -25,7 +25,7 @@ export const SERVICES = [
   },
   {
     icon: "heart",
-    title: "Culto de Mujeres",
+    title: "Culto de Damas",
     schedule: "3er Viernes 07:00 p.m.",
     scheduleIcon: "clock",
     desc: "Espacio de comunión y empoderamiento para mujeres de fe.",
