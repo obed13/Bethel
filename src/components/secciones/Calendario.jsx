@@ -153,7 +153,7 @@ const Calendario = () => {
 
   const [viewYear,  setViewYear]  = useState(2026);
   const [viewMonth, setViewMonth] = useState(4);          // Mayo
-  const [selected,  setSelected]  = useState("2026-05-03");
+  const [selected,  setSelected]  = useState(todayStr);
   const [filter,    setFilter]    = useState("todos");
 
   const calDays = useMemo(() => buildCalendarDays(viewYear, viewMonth), [viewYear, viewMonth]);
