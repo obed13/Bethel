@@ -1,4 +1,4 @@
-# Bethel Church — MSBN España
+# Bethel Church
 
 Sitio web oficial de Bethel Church, construido con **React 19** + **Tailwind CSS v4** + **Vite**.
 
