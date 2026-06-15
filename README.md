@@ -17,6 +17,12 @@ bethel-church/
     │   └── index.js      # Datos: NAV_LINKS, SERVICES, CONGREGATIONS, etc.
     ├── hooks/
     │   └── useContactForm.js  # Hook del formulario de contacto
+    ├── images/
+    │   └── bethel.jpeg # Logo
+    │   └── bethel.png  # Logo
+    ├── pages/
+    │   └── LandingPage.jsx # Landing
+    │   └── LoginPage.jsx  # Login 
     └── components/
         ├── Icon.jsx           # SVG icon system (lucide-style)
         ├── TopBar.jsx         # Barra superior con teléfono y redes
