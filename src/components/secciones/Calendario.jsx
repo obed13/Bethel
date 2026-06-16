@@ -2,7 +2,7 @@ import { useState, useMemo } from "react";
 import { useEvents } from "../../hooks/useEvents";
 
 // ─── Datos ────────────────────────────────────────────────────────────────────
-/*
+
 const EVENTS = [
   { id: 1,  title: "Culto Dominical",         date: "2026-05-03", time: "11:30h", location: "Todas las congregaciones", category: "culto",     desc: "Reunión central de adoración y Palabra para toda la familia.",            featured: true  },
   { id: 2,  title: "Culto Dominical (tarde)", date: "2026-05-03", time: "18:00h", location: "Getafe, Madrid",           category: "culto",     desc: "Segunda reunión dominical. Bienvenida especial a nuevos visitantes.",     featured: false },
@@ -23,7 +23,7 @@ const EVENTS = [
   { id: 17, title: "Culto Dominical",         date: "2026-05-31", time: "11:30h", location: "Todas las congregaciones", category: "culto",     desc: "Reunión central de adoración y Palabra.",                                featured: true  },
   { id: 18, title: "Culto de Jóvenes",        date: "2026-06-06", time: "18:00h", location: "Getafe, Madrid",           category: "jovenes",   desc: "Adoración y palabra para la nueva generación.",                          featured: false },
   { id: 19, title: "Culto Dominical",         date: "2026-06-07", time: "11:30h", location: "Todas las congregaciones", category: "culto",     desc: "Reunión central de adoración.",                                          featured: true  },
-];*/
+];
 
 const CATEGORIES = [
   { key: "todos",     label: "Todos"     },
@@ -159,21 +159,21 @@ const Calendario = () => {
 
   const calDays = useMemo(() => buildCalendarDays(viewYear, viewMonth), [viewYear, viewMonth]);
 
-  const { events: dayEvents, loading } = useEvents({ date: selected });
-  const { events: monthEvents }        = useEvents({ month: `${viewYear}-${String(viewMonth + 1).padStart(2, "0")}` });
+  //const { events: dayEvents, loading } = useEvents({ date: selected });
+  //const { events: monthEvents }        = useEvents({ month: `${viewYear}-${String(viewMonth + 1).padStart(2, "0")}` });
 
-  /*const eventDates = useMemo(() => {
+  const eventDates = useMemo(() => {
     const s = new Set();
     EVENTS.forEach((e) => s.add(e.date));
     return s;
-  }, []);*/
+  }, []);
 
   // Con monthEvents construyes los puntos amarillos del calendario:
-  const eventDates = useMemo(() => {
+  /*const eventDates = useMemo(() => {
     const s = new Set();
     monthEvents.forEach(e => s.add(e.date));
     return s;
-  }, [monthEvents]);
+  }, [monthEvents]);*/
 
   const prevMonth = () => {
     if (viewMonth === 0) { setViewMonth(11); setViewYear((y) => y - 1); }
@@ -184,6 +184,9 @@ const Calendario = () => {
     else setViewMonth((m) => m + 1);
   };
 
+  // Antes mostrabas dayEvents directo.
+  // Ahora filtra por categoría al renderizar:
+  //const eventosFiltrados = filter === "todos" ? dayEvents : dayEvents.filter(e => e.category === filter);
   // Solo eventos del día seleccionado, filtrados por categoría
   const dayEvents = useMemo(() =>
     EVENTS
