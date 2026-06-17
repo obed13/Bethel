@@ -1,7 +1,29 @@
 import { useState, useMemo } from "react";
 import { useEvents } from "../../hooks/useEvents";
 
-// ─── Categorías y estilos ───────────────────────────────────────────────────
+// ─── Datos ────────────────────────────────────────────────────────────────────
+
+const EVENTS = [
+  { id: 1,  title: "Culto Dominical",         date: "2026-06-16", time: "11:30h", location: "Todas las congregaciones", category: "culto",     desc: "Reunión central de adoración y Palabra para toda la familia.",            featured: true  },
+  { id: 2,  title: "Culto Dominical (tarde)", date: "2026-06-16", time: "18:00h", location: "Getafe, Madrid",           category: "culto",     desc: "Segunda reunión dominical. Bienvenida especial a nuevos visitantes.",     featured: false },
+  { id: 3,  title: "Escuela de Líderes",      date: "2026-06-17", time: "20:00h", location: "Getafe, Madrid",           category: "liderazgo", desc: "Formación integral para el desarrollo de dones y liderazgo ministerial.", featured: false },
+  { id: 4,  title: "PGM – Grupos Pequeños",   date: "2026-06-18", time: "20:00h", location: "Lucero / Barcelona",       category: "pgm",       desc: "Grupos en casas para compartir, orar y crecer juntos en hermandad.",     featured: false },
+  { id: 5,  title: "Culto de Oración",        date: "2026-06-19", time: "19:00h", location: "Lucero, Madrid",           category: "oracion",   desc: "Tiempo dedicado a la intercesión y la búsqueda de Dios.",               featured: false },
+  { id: 6,  title: "Culto Dominical",         date: "2026-06-20", time: "11:30h", location: "Todas las congregaciones", category: "culto",     desc: "Reunión central de adoración y Palabra.",                                featured: true  },
+  { id: 7,  title: "Escuela de Líderes",      date: "2026-06-21", time: "20:00h", location: "Getafe, Madrid",           category: "liderazgo", desc: "Formación integral para el desarrollo de dones y liderazgo ministerial.", featured: false },
+  { id: 8,  title: "PGM – Grupos Pequeños",   date: "2026-06-22", time: "20:00h", location: "Valencia / Málaga",        category: "pgm",       desc: "Grupos en casas para orar y crecer juntos.",                             featured: false },
+  { id: 9,  title: "Culto de Jóvenes",        date: "2026-06-23", time: "18:00h", location: "Getafe, Madrid",           category: "jovenes",   desc: "Un tiempo dinámico de adoración y palabra para la nueva generación.",    featured: false },
+  { id: 10, title: "Culto Dominical",         date: "2026-06-24", time: "11:30h", location: "Todas las congregaciones", category: "culto",     desc: "Reunión central de adoración y Palabra.",                                featured: true  },
+  { id: 11, title: "Escuela de Líderes",      date: "2026-06-25", time: "20:00h", location: "Getafe, Madrid",           category: "liderazgo", desc: "Formación integral de liderazgo ministerial.",                           featured: false },
+  { id: 12, title: "PGM – Grupos Pequeños",   date: "2026-06-26", time: "20:00h", location: "Lepe, Huelva",             category: "pgm",       desc: "Grupos en casas para orar y crecer juntos.",                             featured: false },
+  { id: 13, title: "Culto de Mujeres",        date: "2026-06-27", time: "18:00h", location: "Getafe, Madrid",           category: "mujeres",   desc: "Espacio de comunión y empoderamiento para mujeres de fe.",               featured: false },
+  { id: 14, title: "Culto Dominical",         date: "2026-06-28", time: "11:30h", location: "Todas las congregaciones", category: "culto",     desc: "Reunión central de adoración y Palabra.",                                featured: true  },
+  { id: 15, title: "Escuela de Líderes",      date: "2026-06-29", time: "20:00h", location: "Getafe, Madrid",           category: "liderazgo", desc: "Formación integral de liderazgo ministerial.",                           featured: false },
+  { id: 16, title: "PGM – Grupos Pequeños",   date: "2026-06-30", time: "20:00h", location: "Barcelona / Valencia",     category: "pgm",       desc: "Grupos en casas para orar y crecer juntos.",                             featured: false },
+  { id: 17, title: "Culto Dominical",         date: "2026-06-30", time: "11:30h", location: "Todas las congregaciones", category: "culto",     desc: "Reunión central de adoración y Palabra.",                                featured: true  },
+  { id: 18, title: "Culto de Jóvenes",        date: "2026-07-06", time: "18:00h", location: "Getafe, Madrid",           category: "jovenes",   desc: "Adoración y palabra para la nueva generación.",                          featured: false },
+  { id: 19, title: "Culto Dominical",         date: "2026-07-07", time: "11:30h", location: "Todas las congregaciones", category: "culto",     desc: "Reunión central de adoración.",                                          featured: true  },
+];
 
 const CATEGORIES = [
   { key: "todos",     label: "Todos"     },
@@ -131,32 +153,27 @@ const Calendario = () => {
   const todayStr = fmtDate(today);
 
   const [viewYear,  setViewYear]  = useState(today.getFullYear());
-  const [viewMonth, setViewMonth] = useState(today.getMonth());
+  const [viewMonth, setViewMonth] = useState(today.getMonth());          // Mayo
   const [selected,  setSelected]  = useState(todayStr);
   const [filter,    setFilter]    = useState("todos");
 
   const calDays = useMemo(() => buildCalendarDays(viewYear, viewMonth), [viewYear, viewMonth]);
 
-  // ── Datos desde la API (Cloudflare D1) ──────────────────────────────────────
-  // dayEvents:   eventos del día seleccionado → GET /api/events?date=...
-  // monthEvents: eventos del mes visible       → GET /api/events?month=...
-  const { events: dayEventsRaw, loading } = useEvents({ date: selected });
-  const { events: monthEvents }           = useEvents({
-    month: `${viewYear}-${String(viewMonth + 1).padStart(2, "0")}`,
-  });
+  //const { events: dayEvents, loading } = useEvents({ date: selected });
+  //const { events: monthEvents }        = useEvents({ month: `${viewYear}-${String(viewMonth + 1).padStart(2, "0")}` });
 
-  // Filtrado por categoría sobre los eventos ya traídos del día (no requiere otra petición)
-  const dayEvents = useMemo(() => {
-    if (filter === "todos") return dayEventsRaw;
-    return dayEventsRaw.filter((e) => e.category === filter);
-  }, [dayEventsRaw, filter]);
-
-  // Puntos amarillos del calendario: fechas con al menos un evento en el mes
   const eventDates = useMemo(() => {
     const s = new Set();
-    monthEvents.forEach((e) => s.add(e.date));
+    EVENTS.forEach((e) => s.add(e.date));
     return s;
-  }, [monthEvents]);
+  }, []);
+
+  // Con monthEvents construyes los puntos amarillos del calendario:
+  /*const eventDates = useMemo(() => {
+    const s = new Set();
+    monthEvents.forEach(e => s.add(e.date));
+    return s;
+  }, [monthEvents]);*/
 
   const prevMonth = () => {
     if (viewMonth === 0) { setViewMonth(11); setViewYear((y) => y - 1); }
@@ -166,6 +183,17 @@ const Calendario = () => {
     if (viewMonth === 11) { setViewMonth(0); setViewYear((y) => y + 1); }
     else setViewMonth((m) => m + 1);
   };
+
+  // Antes mostrabas dayEvents directo.
+  // Ahora filtra por categoría al renderizar:
+  //const eventosFiltrados = filter === "todos" ? dayEvents : dayEvents.filter(e => e.category === filter);
+  // Solo eventos del día seleccionado, filtrados por categoría
+  const dayEvents = useMemo(() =>
+    EVENTS
+      .filter((e) => e.date === selected && (filter === "todos" || e.category === filter))
+      .sort((a, b) => a.time.localeCompare(b.time)),
+    [selected, filter]
+  );
 
   const selDate  = selected ? new Date(selected + "T00:00:00") : null;
   const selLabel = selDate
@@ -209,6 +237,10 @@ const Calendario = () => {
         </div>
 
         {/* ── Layout: Calendario | Panel día ── */}
+        {/*
+          Mobile  → columna única: calendario arriba, panel abajo
+          Desktop → columna fija 360px + panel que ocupa el resto
+        */}
         <div className="grid grid-cols-1 lg:grid-cols-[360px_1fr] gap-6 items-start">
 
           {/* ── Calendario ── */}
@@ -267,8 +299,8 @@ const Calendario = () => {
                     <span className={[
                       "text-[13px] w-7 h-7 flex items-center justify-center rounded-full font-medium",
                       isSel              ? "bg-[#FCD34D] text-slate-900 font-semibold" : "",
-                      isToday && !isSel  ? "bg-brand-DEFAULT text-white"                : "",
-                      !isSel && !isToday ? "text-slate-700"                             : "",
+                      isToday && !isSel  ? "bg-brand-DEFAULT text-white"                   : "",
+                      !isSel && !isToday ? "text-slate-700"                            : "",
                     ].join(" ")}>
                       {cell.date.getDate()}
                     </span>
@@ -321,12 +353,7 @@ const Calendario = () => {
               </div>
 
               {/* Contenido */}
-              {loading ? (
-                <div className="flex-1 flex flex-col items-center justify-center gap-3 py-10 text-center">
-                  <div className="w-6 h-6 border-2 border-slate-200 border-t-slate-900 rounded-full animate-spin" />
-                  <p className="text-slate-400 text-sm">Cargando eventos…</p>
-                </div>
-              ) : dayEvents.length === 0 ? (
+              {dayEvents.length === 0 ? (
                 <div className="flex-1 flex flex-col items-center justify-center gap-3 py-10 text-center">
                   <span className="text-slate-300"><IcoEmpty /></span>
                   <p className="text-slate-400 text-sm font-medium">Sin actividades este día</p>
