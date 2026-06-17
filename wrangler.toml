@@ -2,7 +2,6 @@
 name       = "bethel"
 pages_build_output_dir = "dist"
 compatibility_date     = "2026-06-17"
-main = "src/main.jsx"  # o donde tengas tu código principal
 
 [[d1_databases]]
 binding      = "DB"          # nombre con el que accedes en el Worker: env.DB
