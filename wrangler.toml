@@ -1,7 +1,7 @@
 # wrangler.toml — configuración de Cloudflare Pages + D1
 name       = "bethel"
 pages_build_output_dir = "dist"
-compatibility_date     = "2026-06-17"
+compatibility_date     = "2026-06-16"
 
 [[d1_databases]]
 binding      = "DB"          # nombre con el que accedes en el Worker: env.DB
