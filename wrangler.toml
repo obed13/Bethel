@@ -1,5 +1,5 @@
 # wrangler.toml — configuración de Cloudflare Pages + D1
-name       = "cfcb-db"
+name = "bethel"
 pages_build_output_dir = "dist"
 compatibility_date     = "2024-09-23"
 
