@@ -1,5 +1,5 @@
 import Icon from "./Icon";
-import Logo from '../images/bethel.png'
+//import Logo from '../images/bethel.png'
 
 const QUICK_LINKS = [
   ["Inicio", "#"],
