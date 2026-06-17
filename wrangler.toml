@@ -7,3 +7,6 @@ compatibility_date     = "2024-09-23"
 binding      = "DB"          # nombre con el que accedes en el Worker: env.DB
 database_name = "cfcb-db"
 database_id  = "8367a346-2ea1-4985-b825-3e2b94a4211c"   # obtenido al crear la BD
+
+[assets]
+directory = "./dist"
