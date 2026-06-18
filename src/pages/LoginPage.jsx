@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../hooks/useAuth";
 
 // ─── Iconos inline ────────────────────────────────────────────────────────────
 
@@ -58,11 +60,15 @@ const IcoFacebook = () => (
 
 // ─── Componente principal ─────────────────────────────────────────────────────
 export const LoginPage = () => {
+  const { login, error: authError, loading } = useAuth();
+  const navigate = useNavigate();
+
   const [email,      setEmail]      = useState("");
   const [password,   setPassword]   = useState("");
   const [showPass,   setShowPass]   = useState(false);
   const [remember,   setRemember]   = useState(false);
   const [loading,    setLoading]    = useState(false);
+  const [submitting, setSubmitting] = useState(false);
   const [error,      setError]      = useState("");
 
   const handleSubmit = async (e) => {
@@ -74,7 +80,11 @@ export const LoginPage = () => {
       return;
     }
 
+    setSubmitting(true);
+    const success = await login(email, password);
+    setSubmitting(false);
     setLoading(true);
+    if (success) navigate("/dashboard");
     // Aquí conectas tu lógica de autenticación
     // await signIn(email, password)
     setTimeout(() => setLoading(false), 1500); // simulación
@@ -106,12 +116,12 @@ export const LoginPage = () => {
           </div>
 
           {/* Error global */}
-          {error && (
+          {authError && (
             <div className="bg-red-50 border border-red-100 rounded-xl px-4 py-3 text-sm text-red-600 flex items-center gap-2">
               <svg className="w-4 h-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/>
               </svg>
-              {error}
+              {authError}
             </div>
           )}
 
@@ -175,29 +185,10 @@ export const LoginPage = () => {
               </div>
             </div>
 
-            {/* Recordar sesión */}
-            <label className="flex items-center gap-2.5 cursor-pointer select-none">
-              <div
-                onClick={() => setRemember((v) => !v)}
-                className={`w-4 h-4 rounded-sm border flex items-center justify-center transition-colors duration-150 shrink-0
-                  ${remember
-                    ? "bg-slate-950 border-slate-950"
-                    : "bg-white border-slate-300 hover:border-slate-500"
-                  }`}
-              >
-                {remember && (
-                  <svg className="w-2.5 h-2.5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round">
-                    <polyline points="20 6 9 17 4 12" />
-                  </svg>
-                )}
-              </div>
-              <span className="text-sm text-slate-500">Mantenerme conectado</span>
-            </label>
-
             {/* Botón principal */}
             <button
               type="submit"
-              disabled={loading}
+              disabled={submitting || loading}
               className="w-full py-3.5 bg-brand-DEFAULT text-white text-sm font-semibold rounded-xl
                 hover:bg-slate-800 transition-colors duration-200 cursor-pointer
                 disabled:opacity-60 disabled:cursor-not-allowed
@@ -215,39 +206,6 @@ export const LoginPage = () => {
               )}
             </button>
           </form>
-
-          {/* Divisor */}
-          <div className="flex items-center gap-3">
-            <div className="flex-1 h-px bg-slate-100" />
-            <span className="text-xs text-slate-400">o continúa con</span>
-            <div className="flex-1 h-px bg-slate-100" />
-          </div>
-
-          {/* Social login */}
-          <div className="grid grid-cols-2 gap-3">
-            {[
-              { Icon: IcoGoogle,   label: "Google"   },
-              { Icon: IcoFacebook, label: "Facebook" },
-            ].map(({ Icon, label }) => (
-              <button
-                key={label}
-                type="button"
-                className="flex items-center justify-center gap-2 py-2.5 px-4 border border-slate-200 rounded-xl
-                  bg-white text-sm font-medium text-slate-700
-                  hover:bg-slate-50 hover:border-slate-300 transition-colors duration-150 cursor-pointer"
-              >
-                <Icon /> {label}
-              </button>
-            ))}
-          </div>
-
-          {/* Registro */}
-          <p className="text-center text-sm text-slate-400 font-light">
-            ¿No tienes cuenta?{" "}
-            <a href="/registro" className="text-slate-900 font-medium hover:underline">
-              Regístrate aquí
-            </a>
-          </p>
         </div>
 
         {/* ── Versículo ── */}
