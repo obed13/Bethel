@@ -222,32 +222,6 @@ export const LoginPage = () => {
             <span className="text-xs text-slate-400">o continúa con</span>
             <div className="flex-1 h-px bg-slate-100" />
           </div>
-
-          {/* Social login */}
-          <div className="grid grid-cols-2 gap-3">
-            {[
-              { Icon: IcoGoogle,   label: "Google"   },
-              { Icon: IcoFacebook, label: "Facebook" },
-            ].map(({ Icon, label }) => (
-              <button
-                key={label}
-                type="button"
-                className="flex items-center justify-center gap-2 py-2.5 px-4 border border-slate-200 rounded-xl
-                  bg-white text-sm font-medium text-slate-700
-                  hover:bg-slate-50 hover:border-slate-300 transition-colors duration-150 cursor-pointer"
-              >
-                <Icon /> {label}
-              </button>
-            ))}
-          </div>
-
-          {/* Registro */}
-          <p className="text-center text-sm text-slate-400 font-light">
-            ¿No tienes cuenta?{" "}
-            <a href="/registro" className="text-slate-900 font-medium hover:underline">
-              Regístrate aquí
-            </a>
-          </p>
         </div>
 
         {/* ── Versículo ── */}
