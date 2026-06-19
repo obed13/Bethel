@@ -73,6 +73,7 @@ export const LoginPage = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log("holoa")
     setError("");
 
     if (!email || !password) {
