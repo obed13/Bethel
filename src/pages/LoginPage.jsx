@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../hooks/useAuth";
 
 // ─── Iconos inline ────────────────────────────────────────────────────────────
 
@@ -58,15 +60,20 @@ const IcoFacebook = () => (
 
 // ─── Componente principal ─────────────────────────────────────────────────────
 export const LoginPage = () => {
+  const { login, error: authError, loading } = useAuth();
+  const navigate = useNavigate();
+
   const [email,      setEmail]      = useState("");
   const [password,   setPassword]   = useState("");
   const [showPass,   setShowPass]   = useState(false);
   const [remember,   setRemember]   = useState(false);
-  const [loading,    setLoading]    = useState(false);
+  //const [loading,    setLoading]    = useState(false);
   const [error,      setError]      = useState("");
+  const [submitting, setSubmitting] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setSubmitting(true);
     setError("");
 
     if (!email || !password) {
@@ -74,10 +81,14 @@ export const LoginPage = () => {
       return;
     }
 
-    setLoading(true);
+    //setLoading(true);
+    
     // Aquí conectas tu lógica de autenticación
+    const success = await login(email, password);
+    setSubmitting(false);
+    if (success) navigate("/dashboard");
     // await signIn(email, password)
-    setTimeout(() => setLoading(false), 1500); // simulación
+    //setTimeout(() => setLoading(false), 1500); // simulación
   };
 
   return (
