@@ -16,9 +16,9 @@ const CATEGORIES = [
 const CATEGORY_BADGE = {
   culto:     "bg-amber-100 text-amber-800",
   jovenes:   "bg-blue-100 text-blue-800",
-  mujeres:   "bg-pink-100 text-pink-800",
+  damas:   "bg-pink-100 text-pink-800",
   liderazgo: "bg-emerald-100 text-emerald-800",
-  pgm:       "bg-violet-100 text-violet-800",
+  panderistas:       "bg-violet-100 text-violet-800",
   oracion:   "bg-green-100 text-green-800",
 };
 
