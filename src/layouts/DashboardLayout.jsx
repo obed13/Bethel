@@ -7,6 +7,8 @@
 import { useState } from "react";
 import { NavLink, Outlet, useNavigate } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
+import { IconBell,IconLogout } from '@tabler/icons-react';
+
 
 const NAV = [
   {
@@ -52,7 +54,7 @@ export default function DashboardLayout() {
 
   const handleLogout = async () => {
     await logout();
-    navigate("/login");
+    navigate("/");
   };
 
   return (
@@ -139,12 +141,14 @@ export default function DashboardLayout() {
           </div>
           <div className="flex items-center gap-2">
             <button className="w-8 h-8 flex items-center justify-center rounded-lg border border-slate-200 text-slate-500 hover:bg-slate-50 transition-colors cursor-pointer">
+              <IconBell />
               <i className="ti ti-bell text-[17px]" aria-hidden="true" />
             </button>
             <button
               onClick={handleLogout}
               className="flex items-center gap-1.5 px-3 h-8 rounded-lg text-sm text-slate-500 border border-slate-200 hover:bg-slate-50 transition-colors cursor-pointer"
             >
+            <IconLogout />
               <i className="ti ti-logout text-[15px]" aria-hidden="true" />
               Salir
             </button>
