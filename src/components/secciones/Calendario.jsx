@@ -7,9 +7,9 @@ const CATEGORIES = [
   { key: "todos",     label: "Todos"     },
   { key: "culto",     label: "Cultos"    },
   { key: "jovenes",   label: "Jóvenes"  },
-  { key: "mujeres",   label: "Mujeres"  },
+  { key: "damas",   label: "Damas"  },
   { key: "liderazgo", label: "Liderazgo" },
-  { key: "pgm",       label: "PGM"      },
+  { key: "panderistas", label: "Panderistas"},
   { key: "oracion",   label: "Oración"  },
 ];
 
@@ -18,7 +18,7 @@ const CATEGORY_BADGE = {
   jovenes:   "bg-blue-100 text-blue-800",
   damas:   "bg-pink-100 text-pink-800",
   liderazgo: "bg-emerald-100 text-emerald-800",
-  panderistas:       "bg-violet-100 text-violet-800",
+  panderistas: "bg-violet-100 text-violet-800",
   oracion:   "bg-green-100 text-green-800",
 };
 
