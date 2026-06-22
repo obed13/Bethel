@@ -20,7 +20,7 @@ const Welcome = () => (
                 <Icon name="heart" size={24} />
               </div>
               <div>
-                <p className="text-2xl font-semibold text-slate-900 leading-none">17+</p>
+                <p className="text-2xl font-semibold text-slate-900 leading-none">19+</p>
                 <p className="text-xs text-slate-500 mt-1">Años de Ministerio</p>
               </div>
             </div>
