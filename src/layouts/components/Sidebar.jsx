@@ -31,21 +31,21 @@ const NAV = [
   },
 ];
 
-export const Sidebar = ({sideOpen,initials,user}) => {
+export const Sidebar = ({sideOpen,initials,user,sideExpanded,isDesktop}) => {
     
   return (
     <aside
         className={[
           "flex flex-col bg-slate-950 transition-all duration-300 shrink-0",
-          sideOpen ? "w-55" : "w-15",
+          isDesktop ? (sideOpen ? "w-55" : "w-15") : "w-65",
         ].join(" ")}
       >
         {/* Logo */}
         <div className="flex items-center gap-3 px-4 py-5 border-b border-white/8 min-h-15">
           <span className="text-lg font-semibold text-white tracking-tight whitespace-nowrap">
-            {sideOpen ? <>BETHEL<span className="text-[#FCD34D]">.</span></> : <span className="text-[#FCD34D]">B</span>}
+            {sideExpanded ? <>BETHEL<span className="text-[#FCD34D]">.</span></> : <span className="text-[#FCD34D]">B</span>}
           </span>
-          {sideOpen && (
+          {sideExpanded && (
             <span className="text-[10px] text-slate-500 tracking-widest uppercase">Panel admin</span>
           )}
         </div>
@@ -54,7 +54,7 @@ export const Sidebar = ({sideOpen,initials,user}) => {
         <nav className="flex-1 overflow-y-auto py-3 px-2">
           {NAV.map((group) => (
             <div key={group.section}>
-              {sideOpen && (
+              {sideExpanded && (
                 <p className="text-[10px] text-slate-600 uppercase tracking-widest px-3 py-2 mt-1 font-medium">
                   {group.section}
                 </p>
@@ -67,15 +67,16 @@ export const Sidebar = ({sideOpen,initials,user}) => {
                   className={({ isActive }) =>
                     [
                       "flex items-center gap-2.5 px-3 py-2.5 rounded-lg mb-0.5 text-sm transition-colors duration-150",
+                      !sideExpanded && "justify-center px-0",
                       isActive
                         ? "bg-[#FCD34D]/12 text-[#FCD34D]"
                         : "text-slate-400 hover:bg-white/6 hover:text-slate-200",
-                    ].join(" ")
+                    ].filter(Boolean).join(" ")
                   }
-                  title={!sideOpen ? item.label : undefined}
+                  title={!sideExpanded ? item.label : undefined}
                 >
                   <i className={`ti ${item.icon} text-[17px]`} aria-hidden="true" />
-                  {sideOpen && item.label}
+                  {sideExpanded && <span className="truncate">{item.label}</span>}
                 </NavLink>
               ))}
             </div>
@@ -84,11 +85,11 @@ export const Sidebar = ({sideOpen,initials,user}) => {
 
         {/* Footer usuario */}
         <div className="border-t border-white/8 p-3">
-          <div className={`flex items-center gap-2.5 ${sideOpen ? "px-1" : "justify-center"}`}>
+          <div className={`flex items-center gap-2.5 ${sideExpanded ? "px-1" : "justify-center"}`}>
             <div className="w-8 h-8 rounded-full bg-[#FCD34D] flex items-center justify-center text-xs font-medium text-slate-900 shrink-0">
               {initials}
             </div>
-            {sideOpen && (
+            {sideExpanded && (
               <div className="flex-1 min-w-0">
                 <p className="text-[13px] text-slate-200 truncate">{user?.name}</p>
                 <p className="text-[11px] text-slate-500 capitalize">{user?.role}</p>
