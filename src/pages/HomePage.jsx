@@ -10,7 +10,7 @@ import Calendario from '../components/secciones/Calendario';
 import Contact from '../components/Contact';
 import Footer from '../components/Footer';
 
-export const LandingPage = () => {
+export const HomePage = () => {
   const [menuOpen, setMenuOpen] = useState(false);
 
   return (

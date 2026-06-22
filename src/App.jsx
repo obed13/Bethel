@@ -3,10 +3,11 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { useAuth } from "./hooks/useAuth";
 
 
-import { LandingPage } from "./pages/LandingPage";
+import { HomePage } from "./pages/HomePage";
 import { LoginPage } from "./pages/LoginPage";
 import DashboardLayout from "./layouts/DashboardLayout";
 import EventosPage    from "./pages/dashboard/EventosPage";
+import LandingPage  from "./pages/dashboard/LandingPage";
 
 
 /** Ruta protegida: redirige a /login si no hay sesión */
@@ -22,7 +23,7 @@ export default function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<LandingPage />} />
+        <Route path="/" element={<HomePage />} />
         <Route path="/login" element={<LoginPage />} />
         {/* Dashboard (protegido) */}
         <Route
@@ -43,6 +44,7 @@ export default function App() {
           {/* <Route path="congregaciones" element={<CongregacionesPage />} /> */}
           {/* <Route path="ministerios"    element={<MinisteriosPage />} />    */}
           {/* <Route path="landing"        element={<LandingPage />} />        */}
+          <Route path="landing" element={<LandingPage />} />
           {/* <Route path="galeria"        element={<GaleriaPage />} />        */}
           {/* <Route path="mensajes"       element={<MensajesPage />} />       */}
           {/* <Route path="usuarios"       element={<UsuariosPage />} />       */}
