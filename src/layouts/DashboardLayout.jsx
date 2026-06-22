@@ -1,5 +1,4 @@
 /**
- * src/layouts/DashboardLayout.jsx
  * Sidebar fija + topbar + área de contenido.
  * Pensado para crecer: cada módulo futuro es solo una ruta nueva.
  */
