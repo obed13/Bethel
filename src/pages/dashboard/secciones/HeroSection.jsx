@@ -12,7 +12,7 @@ const HeroSection = ({ data, onChange }) => {
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <Field label="Badge superior"   value={data.badge}       onChange={s("badge")}       placeholder="Bienvenidos a casa" />
         <Field label="Título principal" value={data.title}       onChange={s("title")}       placeholder="SOMOS UNA IGLESIA..." />
-        <Field label="Subtítulo"        value={data.subtitle}    onChange={s("subtitle")}    placeholder="22 AÑOS..." />
+        <Field label="Subtítulo"        value={data.subtitle}    onChange={s("subtitle")}    placeholder="19 AÑOS..." />
         <Field label="Botón primario"   value={data.ctaPrimary}  onChange={s("ctaPrimary")}  placeholder="Más Información" />
         <Field label="Botón secundario" value={data.ctaSecondary} onChange={s("ctaSecondary")} placeholder="Contáctanos" />
       </div>

@@ -7,7 +7,7 @@ const SEOSection = ({ data, onChange }) => {
   const s = (key) => (val) => onChange({ ...data, [key]: val });
   return (
     <div className="flex flex-col gap-4">
-      <Field label="Título de la página (title tag)" value={data.title}       onChange={s("title")}       placeholder="MSBN España | Iglesia Cristiana..." />
+      <Field label="Título de la página (title tag)" value={data.title}       onChange={s("title")}       placeholder="CFC Bethel | Iglesia Cristiana..." />
       <Field label="Descripción (meta description)"  value={data.description} onChange={s("description")} type="textarea"
         hint="Máximo 160 caracteres. Aparece en los resultados de Google." />
       <Field label="Palabras clave (keywords)"       value={data.keywords}    onChange={s("keywords")}    placeholder="iglesia, cristiana, españa..." />

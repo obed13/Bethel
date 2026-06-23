@@ -8,11 +8,11 @@ const ContactSection = ({ data, onChange }) => {
   return (
     <div className="flex flex-col gap-4">
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-        <Field label="Teléfono principal" value={data.phone}   onChange={s("phone")}   placeholder="+34 690 717 991" />
-        <Field label="Dirección"          value={data.address} onChange={s("address")} placeholder="C/ Huerto, 4, Getafe" />
+        <Field label="Teléfono principal" value={data.phone}   onChange={s("phone")}   placeholder="+52 686 562 2298" />
+        <Field label="Dirección"          value={data.address} onChange={s("address")} placeholder="Rio Sta Cruz 3223, Villa Verde" />
       </div>
       <Field label="Número WhatsApp (sin + ni espacios)" value={data.waNumber} onChange={s("waNumber")}
-        placeholder="34690717991" hint="Solo dígitos, incluye código de país. Ej: 34690717991" />
+        placeholder="526865622298" hint="Solo dígitos, incluye código de país. Ej: 526865622298" />
       <Card title="Banner CTA">
         <div className="flex flex-col gap-3">
           <Field label="Título"          value={data.ctaTitle} onChange={s("ctaTitle")} />

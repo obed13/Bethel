@@ -16,7 +16,7 @@ const FooterSection = ({ data, onChange }) => {
   return (
     <div className="flex flex-col gap-4">
       <Field label="Descripción de la iglesia" value={data.tagline}   onChange={s("tagline")}   type="textarea" />
-      <Field label="Texto de copyright"         value={data.copyright} onChange={s("copyright")} placeholder="© 2023 MSBN España." />
+      <Field label="Texto de copyright"         value={data.copyright} onChange={s("copyright")} placeholder="© 2026 CFC Bethel." />
       <Card title="Enlaces rápidos" action={<AddBtn onClick={add} />}>
         {(data.values || []).length === 0 ?  (
           <p className="text-sm text-slate-400 text-center py-4">Sin enlaces.</p>

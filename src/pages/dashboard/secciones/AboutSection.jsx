@@ -20,7 +20,7 @@ const AboutSection = ({ data, onChange }) => {
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <Field label="Etiqueta de sección" value={data.sectionTag}  onChange={s("sectionTag")} placeholder="Nuestra Identidad" />
         <Field label="Título"              value={data.title}        onChange={s("title")} />
-        <Field label="Años de ministerio"  value={data.years}        onChange={s("years")} placeholder="22+" />
+        <Field label="Años de ministerio"  value={data.years}        onChange={s("years")} placeholder="19+" />
         <Field label="Etiqueta del contador" value={data.yearsLabel} onChange={s("yearsLabel")} placeholder="Años de Ministerio" />
       </div>
       <Field label="Descripción principal" value={data.description}  onChange={s("description")} type="textarea" />
