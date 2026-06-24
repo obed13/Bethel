@@ -1,6 +1,21 @@
 import Icon from "./Icon";
+import { useLandingSection } from "../hooks/useLanding";
 
-const Welcome = () => (
+const Welcome = () => {
+  const { data, loading } = useLandingSection("about");
+
+  // Mientras carga muestra el fondo oscuro sin texto (evita layout shift)
+  if (loading) {
+    return (
+      <section
+        className="lg:py-28 bg-white pt-20 pb-20" id="welcome"
+      />
+    );
+  }
+
+  const { sectionTag, title, description, description2, years, yearsLabel, image, values } = data;
+
+  return (
   <section className="lg:py-28 bg-white pt-20 pb-20" id="welcome">
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
@@ -10,7 +25,7 @@ const Welcome = () => (
           <div className="absolute -top-4 -left-4 w-24 h-24 bg-slate-200 rounded-full blur-2xl" />
           <img
             src="https://images.unsplash.com/photo-1511632765486-a01980e01a18?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80"
-            alt="Comunidad MSBN"
+            alt="Comunidad CFCB"
             className="relative rounded-2xl shadow-xl z-10 w-full object-cover"
             style={{ height: 500, filter: "grayscale(0.2)" }}
           />
@@ -75,6 +90,7 @@ const Welcome = () => (
       </div>
     </div>
   </section>
-);
+  );
+};
 
 export default Welcome;
