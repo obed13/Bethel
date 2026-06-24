@@ -1,5 +1,6 @@
 import Icon from "./Icon";
 import { SERVICES } from "../data";
+import { useLandingSection } from "../hooks/useLanding";
 
 const ServiceCard = ({ s }) => (
   <div className="group bg-white rounded-2xl p-6 shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border border-slate-100">
@@ -27,28 +28,31 @@ const FeaturedServiceCard = () => (
         >
           <Icon name="sun" size={24} />
         </div>
-        <h3 className="text-2xl font-semibold mb-2 tracking-tight">Servicio Dominical</h3>
+        <h3 className="text-2xl font-semibold mb-2 tracking-tight">Servicio de Celebracion</h3>
         <p className="flex items-center gap-2 font-medium text-slate-300 mb-4">
           <Icon name="clock" size={16} /> Domingo 10:30 a.m.
         </p>
         <p className="text-slate-300 text-sm leading-relaxed max-w-md">
-          Nuestra reunión central. Un tiempo glorioso de alabanza, adoración y exposición de
-          la Palabra de Dios para toda la familia.
+          Nuestra reunión central. Un tiempo glorioso de alabanza, adoración y Palabra de Dios para toda la familia.
         </p>
       </div>
     </div>
   </div>
 );
 
-const Services = () => (
+
+const Services = () => { 
+  const { data } = useLandingSection("services");
+  const { sectionTitle, sectionSub, items } = data;
+  return (
   <section id="services" className="py-20 bg-slate-50">
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div className="text-center max-w-3xl mx-auto mb-16">
         <h2 className="text-3xl font-semibold tracking-tight text-slate-900 mb-4">
-          Nuestros Servicios
+          {sectionTitle}
         </h2>
         <p className="text-slate-500 font-light">
-          Espacios diseñados para tu crecimiento espiritual y conexión comunitaria.
+          {sectionSub}
         </p>
       </div>
 
@@ -60,6 +64,7 @@ const Services = () => (
       </div>
     </div>
   </section>
-);
+  )
+};
 
 export default Services;
