@@ -1,6 +1,7 @@
 import Icon from "./Icon";
 import { SOCIALS } from "../data";
 import useContactForm from "../hooks/useContactForm";
+import { useLandingSection } from "../hooks/useLanding";
 
 const InputField = ({ label, name, type = "text", placeholder, value, onChange }) => (
   <div>
@@ -18,7 +19,7 @@ const InputField = ({ label, name, type = "text", placeholder, value, onChange }
   </div>
 );
 
-const SocialLinks = () => (
+const SocialLinks = ({ phone, address, waNumber, showWA }) => (
   <div className="bg-slate-50 rounded-2xl p-8 border border-slate-200">
     <h3 className="text-xl font-medium text-slate-900 mb-6">
       Conéctate con nuestras plataformas
@@ -40,18 +41,27 @@ const SocialLinks = () => (
     <div className="mt-8 pt-8 border-t border-slate-200 space-y-3">
       <div className="flex items-start gap-3 text-sm text-slate-600">
         <Icon name="map-pin" size={16} className="text-slate-950 mt-0.5" />
-        <span>Rio Sta Cruz 3223, Villa Verde, 21395 B.C.</span>
+        <span>{address}</span>
       </div>
       <div className="flex items-center gap-3 text-sm text-slate-600">
         <Icon name="phone" size={16} className="text-slate-950" />
-        <span>+52 686 562 2298</span>
+        <span>{phone}</span>
       </div>
+      {showWA && (
+        <div className="flex items-center gap-3 text-sm text-slate-600">
+        <Icon name="phone" size={16} className="text-slate-950" />
+        <span><a href={`https://wa.me/${waNumber}`}>WhatsApp</a></span>
+      </div>
+        
+      )}
     </div>
   </div>
 );
 
 const Contact = () => {
   const { form, handleChange, handleSubmit } = useContactForm();
+  const { data } = useLandingSection("contact");
+  const { phone, address, waNumber, showWA } = data;
 
   return (
     <section id="contact" className="py-20 bg-white border-t border-slate-50">
@@ -121,7 +131,7 @@ const Contact = () => {
 
           {/* Sidebar */}
           <div className="flex flex-col justify-center lg:pl-12">
-            <SocialLinks />
+            <SocialLinks phone={phone} address={address} waNumber={waNumber} showWA={showWA} />
           </div>
         </div>
       </div>
