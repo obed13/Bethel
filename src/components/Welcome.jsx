@@ -35,8 +35,8 @@ const Welcome = () => {
                 <Icon name="heart" size={24} />
               </div>
               <div>
-                <p className="text-2xl font-semibold text-slate-900 leading-none">19+</p>
-                <p className="text-xs text-slate-500 mt-1">Años de Ministerio</p>
+                <p className="text-2xl font-semibold text-slate-900 leading-none">{years}</p>
+                <p className="text-xs text-slate-500 mt-1">{yearsLabel}</p>
               </div>
             </div>
           </div>
@@ -45,29 +45,16 @@ const Welcome = () => {
         {/* Text */}
         <div className="space-y-6">
           <span className="text-slate-950 font-medium tracking-wide text-sm uppercase">
-            Nuestra Identidad
+            {sectionTag}
           </span>
           <h2 className="text-3xl lg:text-4xl font-semibold tracking-tight text-slate-900 leading-tight">
-            Una familia de fe comprometida con la{" "}
-            <span
-              style={{
-                backgroundClip: "text",
-                WebkitBackgroundClip: "text",
-                WebkitTextFillColor: "transparent",
-                backgroundImage: "linear-gradient(to right,#0f172a,#334155)",
-              }}
-            >
-              Gran Comisión
-            </span>
+            {title}
           </h2>
           <p className="text-slate-600 leading-relaxed font-light">
-            En CFC Bethel, llevamos más de una década sirviendo a nuestra comunidad y
-            expandiendo el mensaje de esperanza en la nación. Creemos en una iglesia activa,
-            acogedora y relevante para los tiempos actuales.
+            {description}
           </p>
           <p className="text-slate-600 leading-relaxed font-light">
-            Nuestra visión es formar discípulos que impacten su entorno, viviendo los principios
-            del Reino de Dios con autenticidad y amor.
+            {description2}
           </p>
 
           <div className="pt-4 grid grid-cols-2 gap-4">
