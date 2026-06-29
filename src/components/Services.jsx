@@ -44,6 +44,7 @@ const FeaturedServiceCard = () => (
 const Services = () => { 
   const { data } = useLandingSection("services");
   const { sectionTitle, sectionSub, items } = data;
+  //console.log("SERVICES",  items);
   return (
   <section id="services" className="py-20 bg-slate-50">
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
