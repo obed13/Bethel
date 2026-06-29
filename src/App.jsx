@@ -8,6 +8,7 @@ import { LoginPage } from "./pages/LoginPage";
 import DashboardLayout from "./layouts/DashboardLayout";
 import EventosPage    from "./pages/dashboard/EventosPage";
 import LandingPage  from "./pages/dashboard/LandingPage";
+import MensajesPage  from "./pages/dashboard/MensajesPage";
 
 
 /** Ruta protegida: redirige a /login si no hay sesión */
@@ -46,7 +47,7 @@ export default function App() {
           {/* <Route path="landing"        element={<LandingPage />} />        */}
           <Route path="landing" element={<LandingPage />} />
           {/* <Route path="galeria"        element={<GaleriaPage />} />        */}
-          {/* <Route path="mensajes"       element={<MensajesPage />} />       */}
+          <Route path="mensajes"       element={<MensajesPage />} />
           {/* <Route path="usuarios"       element={<UsuariosPage />} />       */}
           {/* <Route path="configuracion"  element={<ConfiguracionPage />} />  */}
         </Route>

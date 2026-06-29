@@ -13,7 +13,7 @@ const InputField = ({ label, name, type = "text", placeholder, value, onChange }
       value={value}
       onChange={onChange}
       type={type}
-      className="w-full rounded-lg border border-slate-200 bg-slate-50 px-4 py-3 text-sm outline-none focus:border-brand-DEFAULT"
+      className="w-full rounded-lg border border-slate-200 bg-slate-50 px-4 py-3 text-sm outline-none focus:border-brand-DEFAULT disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
       placeholder={placeholder}
     />
   </div>
@@ -47,10 +47,19 @@ const SocialLinks = ({ phone, address, waNumber, showWA }) => (
         <Icon name="phone" size={16} className="text-slate-950" />
         <span>{phone}</span>
       </div>
-      {showWA && (
+      {showWA && waNumber && (
         <div className="flex items-center gap-3 text-sm text-slate-600">
         <Icon name="phone" size={16} className="text-slate-950" />
-        <span><a href={`https://wa.me/${waNumber}`}>WhatsApp</a></span>
+        <span>
+          <a 
+            href={`https://wa.me/${waNumber}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:text-slate-900 transition-colors"
+          >
+            WhatsApp
+          </a>
+        </span>
       </div>
         
       )}
