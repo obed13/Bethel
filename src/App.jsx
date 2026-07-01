@@ -9,6 +9,7 @@ import DashboardLayout from "./layouts/DashboardLayout";
 import EventosPage    from "./pages/dashboard/EventosPage";
 import LandingPage  from "./pages/dashboard/LandingPage";
 import MensajesPage  from "./pages/dashboard/MensajesPage";
+import CongregacionesPage from "./pages/dashboard/CongregacionesPage";
 
 
 /** Ruta protegida: redirige a /login si no hay sesión */
@@ -42,7 +43,7 @@ export default function App() {
           <Route path="eventos" element={<EventosPage />} />
  
           {/* Módulos futuros — descomenta cuando los construyas: */}
-          {/* <Route path="congregaciones" element={<CongregacionesPage />} /> */}
+          <Route path="congregaciones" element={<CongregacionesPage />} />
           {/* <Route path="ministerios"    element={<MinisteriosPage />} />    */}
           {/* <Route path="landing"        element={<LandingPage />} />        */}
           <Route path="landing" element={<LandingPage />} />
