@@ -30,7 +30,7 @@ const IcoBack    = () => <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none
 // ─── Primitivos UI ────────────────────────────────────────────────────────────
 // ─── Modal Congregación ───────────────────────────────────────────────────────
 
-const EMPTY_CONGREG = { city: "", pastor: "", address: "", phone: "", schedule: "", image: "" };
+const EMPTY_CONGREG = { ciudad: "", pastores: "", direccion: "", telefono: "", horarios: "", image: "" };
 
 function CongregModal({ initial, onClose, onSaved }) {
   const isEdit = !!initial?.id;
@@ -41,9 +41,9 @@ function CongregModal({ initial, onClose, onSaved }) {
 
   const handleSave = async () => {
     setError("");
-    if (!form.city?.trim()) { setError("La ciudad es obligatoria"); return; }
+    if (!form.ciudad?.trim()) { setError("La ciudad es obligatoria"); return; }
     setSaving(true);
-    console.log("Saving congregación:", form);
+    
     try {
       
       const url = isEdit ? `/api/congregaciones?id=${initial.id}` : "/api/congregaciones";
@@ -53,6 +53,7 @@ function CongregModal({ initial, onClose, onSaved }) {
         body: JSON.stringify(form),
       });
       const json = await res.json();
+      console.log("Saving congregación:", isEdit ? "PUT" : "POST", form, json);
       if (!json.ok) { setError(json.error ?? "Error al guardar"); return; }
       onSaved(json.data);
     } catch { setError("Error de conexión"); }
@@ -68,11 +69,11 @@ function CongregModal({ initial, onClose, onSaved }) {
         </div>
         {error && <div className="mb-4 px-3 py-2 bg-red-50 border border-red-100 rounded-xl text-sm text-red-600">{error}</div>}
         <div className="flex flex-col gap-4">
-          <Field label="Ciudad / Sede" value={form.city}     onChange={s("city")}     required placeholder="Ciudad" />
-          <Field label="Pastores"      value={form.pastor}   onChange={s("pastor")}   placeholder="Nombre del pastor/a" />
-          <Field label="Dirección"     value={form.address}  onChange={s("address")}  placeholder="C/ Ejemplo, 1 — Ciudad" />
-          <Field label="Teléfono"      value={form.phone}    onChange={s("phone")}    type="tel" placeholder="+34 000 000 000" />
-          <Field label="Horarios"      value={form.schedule} onChange={s("schedule")} placeholder="Miércoles 20:00h | Domingos 11:30h" />
+          <Field label="Ciudad / Sede" value={form.ciudad}     onChange={s("ciudad")}     required placeholder="Ciudad" />
+          <Field label="Pastores"      value={form.pastores}   onChange={s("pastores")}   placeholder="Nombre del pastor/a" />
+          <Field label="Dirección"     value={form.direccion}  onChange={s("direccion")}  placeholder="C/ Ejemplo, 1 — Ciudad" />
+          <Field label="Teléfono"      value={form.telefono}    onChange={s("telefono")}    type="tel" placeholder="+34 000 000 000" />
+          <Field label="Horarios"      value={form.horarios} onChange={s("horarios")} placeholder="Miércoles 20:00h | Domingos 11:30h" />
         </div>
         <div className="flex gap-3 mt-6">
           <button onClick={onClose} className="flex-1 py-3 rounded-xl border border-slate-200 text-slate-600 text-sm font-medium hover:bg-slate-50 cursor-pointer">Cancelar</button>
@@ -89,25 +90,31 @@ function CongregModal({ initial, onClose, onSaved }) {
 // ─── Modal Miembro ────────────────────────────────────────────────────────────
 
 const EMPTY_MEMBER = {
-  first_name: "", last_name_paterno: "", last_name_materno: "",
-  birthday: "", baptism_holy_spirit: "",
-  from_other_church: false, previous_church: "",
-  address: "", phone: "", notes: "",
+  nombre: "", 
+  apellido_paterno: "", 
+  apellido_materno: "",
+  fecha_cumpleanos: "", 
+  fecha_bautizo_es: "",
+  viene_otra_iglesia: false, 
+  iglesia_anterior: "",
+  direccion: "", 
+  telefono: "", 
+  notes: "",
 };
 
 function MemberModal({ initial, congregacionId, onClose, onSaved }) {
   const isEdit = !!initial?.id;
   const [form, setForm]     = useState(initial ? {
-    first_name:           initial.first_name,
-    last_name_paterno:    initial.last_name_paterno,
-    last_name_materno:    initial.last_name_materno,
-    birthday:             initial.birthday ?? "",
-    baptism_holy_spirit:  initial.baptism_holy_spirit ?? "",
-    from_other_church:    initial.from_other_church,
-    previous_church:      initial.previous_church,
-    address:              initial.address,
-    phone:                initial.phone,
-    notes:                initial.notes,
+    nombre:              initial.nombre,
+    apellido_paterno:    initial.apellido_paterno,
+    apellido_materno:    initial.apellido_materno,
+    fecha_cumpleanos:    initial.fecha_cumpleanos ?? "",
+    fecha_bautizo_es:    initial.fecha_bautizo_es ?? "",
+    viene_otra_iglesia:  initial.viene_otra_iglesia,
+    iglesia_anterior:    initial.iglesia_anterior,
+    direccion:           initial.direccion,
+    telefono:            initial.telefono,
+    notes:               initial.notes,
   } : EMPTY_MEMBER);
   const [saving, setSaving] = useState(false);
   const [error, setError]   = useState("");
@@ -115,8 +122,9 @@ function MemberModal({ initial, congregacionId, onClose, onSaved }) {
 
   const handleSave = async () => {
     setError("");
-    if (!form.first_name?.trim()) { setError("El nombre es obligatorio"); return; }
+    if (!form.nombre?.trim()) { setError("El nombre es obligatorio"); return; }
     setSaving(true);
+    console.log("Saving miembro:", isEdit ? "PUT" : "POST", form);
     try {
       const url = isEdit ? `/api/members?id=${initial.id}` : "/api/members";
       const body = isEdit ? form : { ...form, congregacion_id: congregacionId };
@@ -144,32 +152,32 @@ function MemberModal({ initial, congregacionId, onClose, onSaved }) {
         <div className="flex flex-col gap-4">
           {/* Nombre */}
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-            <Field label="Nombre"           value={form.first_name}        onChange={s("first_name")}        required placeholder="María" />
-            <Field label="Apellido paterno"  value={form.last_name_paterno} onChange={s("last_name_paterno")} placeholder="García" />
-            <Field label="Apellido materno"  value={form.last_name_materno} onChange={s("last_name_materno")} placeholder="López" />
+            <Field label="Nombre"           value={form.nombre}        onChange={s("nombre")}        required placeholder="María" />
+            <Field label="Apellido paterno"  value={form.apellido_paterno} onChange={s("apellido_paterno")} placeholder="García" />
+            <Field label="Apellido materno"  value={form.apellido_materno} onChange={s("apellido_materno")} placeholder="López" />
           </div>
 
           {/* Fechas */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-            <Field label="Fecha de cumpleaños"        value={form.birthday}           onChange={s("birthday")}           type="date" hint="Opcional" />
-            <Field label="Fecha bautizo Espíritu Santo" value={form.baptism_holy_spirit} onChange={s("baptism_holy_spirit")} type="date" hint="Opcional" />
+            <Field label="Fecha de cumpleaños"        value={form.fecha_cumpleanos}           onChange={s("fecha_cumpleanos")}           type="date" hint="Opcional" />
+            <Field label="Fecha bautizo Espíritu Santo" value={form.fecha_bautizo_es} onChange={s("fecha_bautizo_es")} type="date" hint="Opcional" />
           </div>
 
           {/* Procedencia */}
           <div className="bg-slate-50 rounded-xl p-4 flex flex-col gap-3 border border-slate-100">
             <Toggle
               label="Viene de otra iglesia"
-              checked={form.from_other_church}
-              onChange={s("from_other_church")}
+              checked={form.viene_otra_iglesia}
+              onChange={s("viene_otra_iglesia")}
             />
-            {form.from_other_church && (
-              <Field label="Nombre de la iglesia anterior" value={form.previous_church} onChange={s("previous_church")} placeholder="Iglesia anterior" />
+            {form.viene_otra_iglesia && (
+              <Field label="Nombre de la iglesia anterior" value={form.iglesia_anterior} onChange={s("iglesia_anterior")} placeholder="Iglesia anterior" />
             )}
           </div>
 
           {/* Contacto */}
-          <Field label="Dirección" value={form.address} onChange={s("address")} placeholder="C/ Ejemplo, 1 — Ciudad" />
-          <Field label="Teléfono"  value={form.phone}   onChange={s("phone")}   type="tel" placeholder="+34 000 000 000" />
+          <Field label="Dirección" value={form.direccion} onChange={s("direccion")} placeholder="C/ Ejemplo, 1 — Ciudad" />
+          <Field label="Teléfono"  value={form.telefono}   onChange={s("telefono")}   type="tel" placeholder="+34 000 000 000" />
           <Field label="Notas"     value={form.notes}   onChange={s("notes")}   type="textarea" placeholder="Observaciones adicionales…" />
         </div>
 
@@ -193,7 +201,7 @@ function CongregCard({ congreg, onSelect, onEdit, onDelete }) {
       {/* Imagen o placeholder */}
       <div className="h-28 bg-slate-100 flex items-center justify-center relative overflow-hidden">
         {congreg.image ? (
-          <img src={congreg.image} alt={congreg.city} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+          <img src={congreg.image} alt={congreg.ciudad} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
         ) : (
           <div className="flex flex-col items-center gap-1 text-slate-300">
             <IcoChurch />
@@ -211,25 +219,25 @@ function CongregCard({ congreg, onSelect, onEdit, onDelete }) {
       </div>
 
       <div className="p-4">
-        <h3 className="font-semibold text-slate-900 text-[14px] mb-1 truncate">{congreg.city}</h3>
-        {congreg.pastor && <p className="text-[12px] text-slate-500 truncate mb-2">{congreg.pastor}</p>}
+        <h3 className="font-semibold text-slate-900 text-[14px] mb-1 truncate">{congreg.ciudad}</h3>
+        {congreg.pastores && <p className="text-[12px] text-slate-500 truncate mb-2">{congreg.pastores}</p>}
 
         <div className="space-y-1 mb-3">
-          {congreg.phone && (
+          {congreg.telefono && (
             <p className="text-[11px] text-slate-400 flex items-center gap-1.5">
-              <i className="ti ti-phone text-[12px]" aria-hidden="true" /> {congreg.phone}
+              <i className="ti ti-phone text-[12px]" aria-hidden="true" /> {congreg.telefono}
             </p>
           )}
-          {congreg.schedule && (
+          {congreg.horarios && (
             <p className="text-[11px] text-slate-400 flex items-center gap-1.5">
-              <i className="ti ti-clock text-[12px]" aria-hidden="true" /> {congreg.schedule}
+              <i className="ti ti-clock text-[12px]" aria-hidden="true" /> {congreg.horarios}
             </p>
           )}
         </div>
 
         <div className="flex items-center justify-between pt-3 border-t border-slate-100">
           <span className="flex items-center gap-1 text-[12px] text-slate-500">
-            <IcoUser /> {congreg.member_count ?? 0} miembros
+            <IcoUser /> {congreg.total_miembros ?? 0} miembros
           </span>
           <button onClick={() => onSelect(congreg)}
             className="flex items-center gap-1 px-3 h-7 rounded-lg bg-slate-950 text-white text-[12px] font-medium hover:bg-slate-800 transition-colors cursor-pointer">
@@ -307,7 +315,7 @@ function MembersView({ congreg, onBack }) {
           <IcoBack /> Congregaciones
         </button>
         <div className="flex-1 min-w-0">
-          <h2 className="text-lg font-semibold text-slate-900 truncate">{congreg.city}</h2>
+          <h2 className="text-lg font-semibold text-slate-900 truncate">{congreg.ciudad}</h2>
           <p className="text-[12px] text-slate-400">{total} miembro{total !== 1 ? "s" : ""} registrado{total !== 1 ? "s" : ""}</p>
         </div>
         <button onClick={() => { setEditing(null); setModal(true); }}
@@ -319,10 +327,10 @@ function MembersView({ congreg, onBack }) {
       {/* Info de la congregación */}
       <div className="bg-white rounded-2xl border border-slate-100 p-5 grid grid-cols-1 sm:grid-cols-3 gap-4">
         {[
-          { icon: "ti-users",    label: "Pastores",  value: congreg.pastor   },
-          { icon: "ti-map-pin",  label: "Dirección", value: congreg.address  },
-          { icon: "ti-phone",    label: "Teléfono",  value: congreg.phone    },
-          { icon: "ti-clock",    label: "Horarios",  value: congreg.schedule },
+          { icon: "ti-users",    label: "Pastores",  value: congreg.pastores   },
+          { icon: "ti-map-pin",  label: "Dirección", value: congreg.direccion  },
+          { icon: "ti-phone",    label: "Teléfono",  value: congreg.telefono    },
+          { icon: "ti-clock",    label: "Horarios",  value: congreg.horarios },
         ].filter(f => f.value).map(f => (
           <div key={f.label} className="flex items-start gap-2">
             <i className={`ti ${f.icon} text-[15px] text-slate-400 mt-0.5 shrink-0`} aria-hidden="true" />
@@ -380,9 +388,9 @@ function MembersView({ congreg, onBack }) {
                     </div>
                     <div className="flex-1 min-w-0">
                       <p className="text-sm font-medium text-slate-900 truncate">{m.full_name}</p>
-                      <p className="text-[11px] text-slate-400 truncate">{m.phone || m.address || "Sin contacto"}</p>
+                      <p className="text-[11px] text-slate-400 truncate">{m.telefono || m.direccion || "Sin contacto"}</p>
                     </div>
-                    {m.from_other_church && (
+                    {m.viene_otra_iglesia && (
                       <span className="text-[10px] bg-violet-100 text-violet-700 px-2 py-0.5 rounded-full font-medium shrink-0">Trans.</span>
                     )}
                   </button>
@@ -530,7 +538,7 @@ export default function CongregacionesPage() {
     const q = search.trim().toLowerCase();
     if (!q) return congregaciones;
     return congregaciones.filter(c =>
-      c.city.toLowerCase().includes(q) || c.pastor.toLowerCase().includes(q)
+      c.ciudad.toLowerCase().includes(q) || c.pastores.toLowerCase().includes(q)
     );
   }, [congregaciones, search]);
 
@@ -566,9 +574,9 @@ export default function CongregacionesPage() {
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-6">
         {[
           { label: "Congregaciones",  value: congregaciones.length,                                         accent: "#FCD34D", icon: "ti-building-church", bg: "bg-amber-50",   color: "#d97706" },
-          { label: "Total miembros",  value: congregaciones.reduce((a, c) => a + (c.member_count ?? 0), 0), accent: "#6366f1", icon: "ti-users",           bg: "bg-indigo-50",  color: "#4f46e5" },
-          { label: "Más grande",      value: congregaciones.length ? Math.max(...congregaciones.map(c => c.member_count ?? 0)) : 0, accent: "#10b981", icon: "ti-star", bg: "bg-emerald-50", color: "#059669" },
-          { label: "Ciudades",        value: new Set(congregaciones.map(c => (c.city || '').split(",")[1]?.trim() || c.city || '')).size, accent: "#f43f5e", icon: "ti-map-pin", bg: "bg-rose-50", color: "#e11d48" },
+          { label: "Total miembros",  value: congregaciones.reduce((a, c) => a + (c.total_miembros ?? 0), 0), accent: "#6366f1", icon: "ti-users",           bg: "bg-indigo-50",  color: "#4f46e5" },
+          { label: "Más grande",      value: congregaciones.length ? Math.max(...congregaciones.map(c => c.total_miembros ?? 0)) : 0, accent: "#10b981", icon: "ti-star", bg: "bg-emerald-50", color: "#059669" },
+          { label: "Ciudades",        value: new Set(congregaciones.map(c => (c.ciudad || '').split(",")[1]?.trim() || c.ciudad || '')).size, accent: "#f43f5e", icon: "ti-map-pin", bg: "bg-rose-50", color: "#e11d48" },
         ].map(k => (
           <div key={k.label} className="bg-white rounded-xl border border-slate-100 p-4 relative overflow-hidden">
             <div className="absolute top-0 left-0 right-0 h-0.5 rounded-t-xl" style={{ background: k.accent }} />
