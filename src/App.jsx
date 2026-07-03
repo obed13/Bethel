@@ -13,7 +13,7 @@ import CongregacionesPage from "./pages/dashboard/CongregacionesPage";
 import UsuariosPage  from "./pages/dashboard/UsuariosPage";
 import InicioPage    from "./pages/dashboard/InicioPage";
 import MinisteriosPage from "./pages/dashboard/MinisteriosPage";
-
+import GaleriaPage from "./pages/dashboard/GaleriaPage";
 
 /** Ruta protegida: redirige a /login si no hay sesión */
 function PrivateRoute({ children }) {
@@ -48,9 +48,8 @@ export default function App() {
           {/* Módulos futuros — descomenta cuando los construyas: */}
           <Route path="congregaciones" element={<CongregacionesPage />} />
           <Route path="ministerios"    element={<MinisteriosPage />} />
-          {/* <Route path="landing"        element={<LandingPage />} />        */}
-          <Route path="landing" element={<LandingPage />} />
-          {/* <Route path="galeria"        element={<GaleriaPage />} />        */}
+          <Route path="landing"        element={<LandingPage />} />
+          <Route path="galeria"        element={<GaleriaPage />} />     
           <Route path="mensajes"       element={<MensajesPage />} />
           <Route path="usuarios"       element={<UsuariosPage />} />
           {/* <Route path="configuracion"  element={<ConfiguracionPage />} />  */}
