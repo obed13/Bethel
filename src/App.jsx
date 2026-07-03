@@ -10,6 +10,9 @@ import EventosPage    from "./pages/dashboard/EventosPage";
 import LandingPage  from "./pages/dashboard/LandingPage";
 import MensajesPage  from "./pages/dashboard/MensajesPage";
 import CongregacionesPage from "./pages/dashboard/CongregacionesPage";
+import UsuariosPage  from "./pages/dashboard/UsuariosPage";
+import InicioPage    from "./pages/dashboard/InicioPage";
+import MinisteriosPage from "./pages/dashboard/MinisteriosPage";
 
 
 /** Ruta protegida: redirige a /login si no hay sesión */
@@ -37,19 +40,19 @@ export default function App() {
           }
         >
           {/* Ruta index → redirige a eventos por ahora */}
-          <Route index element={<Navigate to="eventos" replace />} />
+          <Route index element={<InicioPage />} />
  
           {/* Módulo de Eventos ✅ */}
           <Route path="eventos" element={<EventosPage />} />
  
           {/* Módulos futuros — descomenta cuando los construyas: */}
           <Route path="congregaciones" element={<CongregacionesPage />} />
-          {/* <Route path="ministerios"    element={<MinisteriosPage />} />    */}
+          <Route path="ministerios"    element={<MinisteriosPage />} />
           {/* <Route path="landing"        element={<LandingPage />} />        */}
           <Route path="landing" element={<LandingPage />} />
           {/* <Route path="galeria"        element={<GaleriaPage />} />        */}
           <Route path="mensajes"       element={<MensajesPage />} />
-          {/* <Route path="usuarios"       element={<UsuariosPage />} />       */}
+          <Route path="usuarios"       element={<UsuariosPage />} />
           {/* <Route path="configuracion"  element={<ConfiguracionPage />} />  */}
         </Route>
 

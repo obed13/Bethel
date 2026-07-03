@@ -118,7 +118,7 @@ export async function requireAuth(request, db) {
   }
 
   const user = await db
-    .prepare("SELECT id, name, email, role_id, active FROM users WHERE id = ?")
+    .prepare("SELECT u.id, u.name, u.email, u.role_id, r.key AS role_name, u.active FROM users u JOIN roles r ON r.id = u.role_id WHERE u.id = ?")
     .bind(session.user_id)
     .first();
 
