@@ -14,6 +14,7 @@ import UsuariosPage  from "./pages/dashboard/UsuariosPage";
 import InicioPage    from "./pages/dashboard/InicioPage";
 import MinisteriosPage from "./pages/dashboard/MinisteriosPage";
 import GaleriaPage from "./pages/dashboard/GaleriaPage";
+import ConfiguracionPage from "./pages/dashboard/ConfiguracionPage";
 
 /** Ruta protegida: redirige a /login si no hay sesión */
 function PrivateRoute({ children }) {
@@ -52,7 +53,7 @@ export default function App() {
           <Route path="galeria"        element={<GaleriaPage />} />     
           <Route path="mensajes"       element={<MensajesPage />} />
           <Route path="usuarios"       element={<UsuariosPage />} />
-          {/* <Route path="configuracion"  element={<ConfiguracionPage />} />  */}
+          <Route path="configuracion"  element={<ConfiguracionPage />} />
         </Route>
 
         {/* Catch-all */}
