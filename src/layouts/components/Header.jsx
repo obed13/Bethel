@@ -8,13 +8,12 @@ export const Header = ({handleLogout,setSideOpen,handleBurger}) => {
             onClick={handleBurger}
             aria-label="Abrir menú"
             className="w-8 h-8 flex items-center justify-center rounded-lg text-slate-500 hover:bg-slate-100 transition-colors cursor-pointer"
-            aria-label="Toggle sidebar"
         >
             <i className="ti ti-menu-2 text-[18px]" aria-hidden="true" />
         </button>
         </div>
         <div className="flex items-center gap-2">
-        <button className="w-8 h-8 flex items-center justify-center rounded-lg border border-slate-200 text-slate-500 hover:bg-slate-50 transition-colors cursor-pointer">
+        <button className="w-8 h-8 flex items-center justify-center rounded-lg border border-slate-200 text-slate-500 hover:bg-slate-50 transition-colors cursor-pointer" aria-label="Notificaciones">
             <i className="ti ti-bell text-[17px]" aria-hidden="true" />
         </button>
         <button

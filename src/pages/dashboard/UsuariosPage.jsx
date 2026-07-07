@@ -107,7 +107,7 @@ function UserModal({ initial, roles, onClose, onSaved, currentUserId }) {
       <div className="bg-white rounded-t-3xl sm:rounded-2xl w-full sm:max-w-md border border-slate-100 shadow-xl flex flex-col max-h-[92vh]">
         <div className="flex items-center justify-between px-5 py-4 border-b border-slate-100 shrink-0">
           <h2 className="text-[15px] font-semibold text-slate-900">{isEdit ? "Editar usuario" : "Nuevo usuario"}</h2>
-          <button onClick={onClose} className="w-7 h-7 flex items-center justify-center rounded-lg border border-slate-200 text-slate-400 hover:bg-slate-50 cursor-pointer transition-colors"><IcoX /></button>
+          <button onClick={onClose} aria-label="Cerrar" className="w-7 h-7 flex items-center justify-center rounded-lg border border-slate-200 text-slate-400 hover:bg-slate-50 cursor-pointer transition-colors"><IcoX /></button>
         </div>
 
         <div className="flex-1 overflow-y-auto px-5 py-4 flex flex-col gap-4">
@@ -319,7 +319,7 @@ export default function UsuariosPage() {
               placeholder="Buscar por nombre o correo…"
               className="w-full pl-9 pr-3 h-9 rounded-xl border border-slate-200 bg-slate-50 text-sm outline-none focus:border-slate-950 focus:bg-white transition-colors" />
             {search && (
-              <button onClick={() => setSearch("")} className="absolute right-2.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-700 cursor-pointer"><IcoX /></button>
+              <button onClick={() => setSearch("")} aria-label="Limpiar búsqueda" className="absolute right-2.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-700 cursor-pointer"><IcoX /></button>
             )}
           </div>
           <div className="flex gap-1">

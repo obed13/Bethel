@@ -65,7 +65,7 @@ function CongregModal({ initial, onClose, onSaved }) {
       <div className="bg-white rounded-2xl p-6 w-full max-w-lg max-h-[90vh] overflow-y-auto border border-slate-100 shadow-xl">
         <div className="flex items-center justify-between mb-5">
           <h2 className="text-[15px] font-semibold text-slate-900">{isEdit ? "Editar congregación" : "Nueva congregación"}</h2>
-          <button onClick={onClose} className="w-7 h-7 flex items-center justify-center rounded-lg border border-slate-200 text-slate-400 hover:bg-slate-50 cursor-pointer"><IcoX /></button>
+          <button onClick={onClose} aria-label="Cerrar" className="w-7 h-7 flex items-center justify-center rounded-lg border border-slate-200 text-slate-400 hover:bg-slate-50 cursor-pointer"><IcoX /></button>
         </div>
         {error && <div className="mb-4 px-3 py-2 bg-red-50 border border-red-100 rounded-xl text-sm text-red-600">{error}</div>}
         <div className="flex flex-col gap-4">
@@ -145,7 +145,7 @@ function MemberModal({ initial, congregacionId, onClose, onSaved }) {
       <div className="bg-white rounded-2xl p-6 w-full max-w-lg max-h-[90vh] overflow-y-auto border border-slate-100 shadow-xl">
         <div className="flex items-center justify-between mb-5">
           <h2 className="text-[15px] font-semibold text-slate-900">{isEdit ? "Editar miembro" : "Nuevo miembro"}</h2>
-          <button onClick={onClose} className="w-7 h-7 flex items-center justify-center rounded-lg border border-slate-200 text-slate-400 hover:bg-slate-50 cursor-pointer"><IcoX /></button>
+          <button onClick={onClose} aria-label="Cerrar" className="w-7 h-7 flex items-center justify-center rounded-lg border border-slate-200 text-slate-400 hover:bg-slate-50 cursor-pointer"><IcoX /></button>
         </div>
         {error && <div className="mb-4 px-3 py-2 bg-red-50 border border-red-100 rounded-xl text-sm text-red-600">{error}</div>}
 
@@ -354,7 +354,7 @@ function MembersView({ congreg, onBack }) {
               <input type="text" value={search} onChange={e => handleSearch(e.target.value)}
                 placeholder="Buscar miembro…"
                 className="w-full pl-9 pr-3 h-9 rounded-xl border border-slate-200 bg-slate-50 text-sm outline-none focus:border-slate-950 focus:bg-white transition-colors" />
-              {search && <button onClick={() => handleSearch("")} className="absolute right-2 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-700 cursor-pointer"><IcoX /></button>}
+              {search && <button onClick={() => handleSearch("")} aria-label="Limpiar búsqueda" className="absolute right-2 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-700 cursor-pointer"><IcoX /></button>}
             </div>
           </div>
 
@@ -597,7 +597,7 @@ export default function CongregacionesPage() {
         <input type="text" value={search} onChange={e => setSearch(e.target.value)}
           placeholder="Buscar por ciudad o pastor…"
           className="w-full pl-9 pr-3 h-9 rounded-xl border border-slate-200 bg-white text-sm outline-none focus:border-slate-950 transition-colors" />
-        {search && <button onClick={() => setSearch("")} className="absolute right-2 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-700 cursor-pointer"><IcoX /></button>}
+        {search && <button onClick={() => setSearch("")} aria-label="Limpiar búsqueda" className="absolute right-2 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-700 cursor-pointer"><IcoX /></button>}
       </div>
 
       {/* Grid de tarjetas */}

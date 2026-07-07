@@ -33,8 +33,12 @@ const Header = ({ menuOpen, setMenuOpen }) => (
         </nav>
 
         <button
+        type="button"
           className="lg:hidden p-2 text-slate-600 hover:text-slate-950"
           onClick={() => setMenuOpen(true)}
+          aria-label="Abrir menú"
+  aria-expanded={menuOpen}
+  aria-controls="mobile-menu"
         >
           <Icon name="menu" size={24} />
         </button>

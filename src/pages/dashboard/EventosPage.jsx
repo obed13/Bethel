@@ -139,7 +139,7 @@ function EventFormModal({ initialData, onClose, onSaved }) {
           <h2 className="text-[15px] font-semibold text-slate-900">
             {isEdit ? "Editar evento" : "Nuevo evento"}
           </h2>
-          <button onClick={onClose} className="w-7 h-7 flex items-center justify-center rounded-lg border border-slate-200 text-slate-400 hover:bg-slate-50 cursor-pointer transition-colors">
+          <button onClick={onClose} aria-label="Cerrar" className="w-7 h-7 flex items-center justify-center rounded-lg border border-slate-200 text-slate-400 hover:bg-slate-50 cursor-pointer transition-colors">
             <IcoX />
           </button>
         </div>

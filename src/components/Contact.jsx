@@ -68,7 +68,14 @@ const SocialLinks = ({ phone, address, waNumber, showWA }) => (
 );
 
 const Contact = () => {
-  const { form, handleChange, handleSubmit } = useContactForm();
+  const { form,
+  status,
+  errorMsg,
+  handleChange,
+  handleSubmit,
+  isLoading,
+  isSuccess,
+  isError, } = useContactForm();
   const { data } = useLandingSection("contact");
   const { phone, address, waNumber, showWA } = data;
 
@@ -126,13 +133,24 @@ const Contact = () => {
                   placeholder="Escribe tu mensaje aquí..."
                 />
               </div>
+              {isError && (
+  <div className="rounded-lg border border-red-100 bg-red-50 px-4 py-3 text-sm text-red-600">
+    {errorMsg}
+  </div>
+)}
 
+{isSuccess && (
+  <div className="rounded-lg border border-emerald-100 bg-emerald-50 px-4 py-3 text-sm text-emerald-700">
+    Mensaje enviado correctamente. Gracias por contactarnos.
+  </div>
+)}
               <button
                 type="button"
                 onClick={handleSubmit}
+                disabled={isLoading}
                 className="w-full bg-brand-DEFAULT text-white font-medium py-3 rounded-lg hover:bg-slate-800 transition-colors shadow-lg flex items-center justify-center gap-2"
               >
-                <span>Enviar Mensaje</span>
+                <span>{isLoading ? "Enviando..." : "Enviar Mensaje"}</span>
                 <Icon name="send" size={16} />
               </button>
             </div>

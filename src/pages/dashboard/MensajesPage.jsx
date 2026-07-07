@@ -90,6 +90,7 @@ function MessageModal({ message, onClose, onDelete, onMarkRead }) {
             </div>
           </div>
           <button onClick={onClose}
+            aria-label="Cerrar"
             className="w-7 h-7 flex items-center justify-center rounded-lg border border-slate-200 text-slate-400 hover:bg-slate-50 cursor-pointer transition-colors">
             <IcoX />
           </button>
@@ -337,6 +338,7 @@ export default function MensajesPage() {
             />
             {search && (
               <button onClick={() => setSearch("")}
+                aria-label="Limpiar búsqueda"
                 className="absolute right-2 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-700 cursor-pointer">
                 <IcoX />
               </button>

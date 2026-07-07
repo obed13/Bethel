@@ -4,7 +4,9 @@ import Logo from '../images/bethel.png'
 
 const MobileMenu = ({ open, onClose }) => (
   <div
+    id="mobile-menu"
     className="fixed inset-0 z-50 bg-white w-full h-full lg:hidden flex flex-col p-6 space-y-4"
+    aria-hidden={!open}
     style={{
       transform: open ? "translateX(0)" : "translateX(100%)",
       transition: "transform 0.3s ease-in-out",
@@ -17,7 +19,16 @@ const MobileMenu = ({ open, onClose }) => (
       <span className="text-2xl font-semibold tracking-tighter text-slate-950">
         CFCBethel
       </span>
-      <button className="p-2 text-slate-500 hover:text-slate-950" onClick={onClose}>
+      <button 
+        type="button"
+        className="p-2 text-slate-500 hover:text-slate-950" 
+        onClick={onClose} 
+        aria-label="Cerrar menú"
+        style={{
+  transform: open ? "translateX(0)" : "translateX(100%)",
+  transition: "transform 0.3s ease-in-out",
+  pointerEvents: open ? "auto" : "none",
+}} >
         <Icon name="x" size={28} />
       </button>
     </div>
