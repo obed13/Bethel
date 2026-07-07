@@ -15,7 +15,7 @@ const CATEGORIES = [
   { key: "jovenes",   label: "Jóvenes"   },
   { key: "mujeres",   label: "Mujeres"   },
   { key: "liderazgo", label: "Liderazgo" },
-  { key: "pgm",       label: "PGM"       },
+  { key: "panderistas",       label: "Panderistas"       },
   { key: "oracion",   label: "Oración"   },
 ];
 
@@ -24,7 +24,7 @@ const BADGE = {
   jovenes:   "bg-blue-100 text-blue-800",
   mujeres:   "bg-pink-100 text-pink-800",
   liderazgo: "bg-emerald-100 text-emerald-800",
-  pgm:       "bg-violet-100 text-violet-800",
+  panderistas: "bg-violet-100 text-violet-800",
   oracion:   "bg-green-100 text-green-800",
 };
 
@@ -226,8 +226,8 @@ export default function EventosPage() {
 
   const monthStr = `${viewYear}-${String(viewMonth+1).padStart(2,"0")}`;
 
-  const { events: monthEvents, loading, refetch } = useEvents({ month: monthStr });
-  const { events: dayEventsRaw }                   = useEvents({ date: selected });
+  const { events: monthEvents, loading, refetch: refetchMonth } = useEvents({ month: monthStr });
+  const { events: dayEventsRaw, refetch: refetchDay }           = useEvents({ date: selected });
 
   const calDays = useMemo(() => buildCalDays(viewYear, viewMonth), [viewYear, viewMonth]);
   const eventDates = useMemo(() => new Set(monthEvents.map((e) => e.date)), [monthEvents]);
@@ -259,15 +259,22 @@ export default function EventosPage() {
     return monthEvents.filter((e)=>{const d=new Date(e.date+"T00:00:00");return d>=today&&d<=in7;}).length;
   }, [monthEvents]);
 
-  const handleSaved = useCallback(() => {
-    setModal(false); setEditing(null); refetch();
-  }, [refetch]);
+const refreshEvents = useCallback(() => {
+  refetchMonth();
+  refetchDay();
+}, [refetchMonth, refetchDay]);
 
-  const handleDelete = async (id) => {
-    await deleteEvent(id);
-    setConfirmDel(null);
-    refetch();
-  };
+const handleSaved = useCallback(() => {
+  setModal(false);
+  setEditing(null);
+  refreshEvents();
+}, [refreshEvents]);
+
+const handleDelete = async (id) => {
+  await deleteEvent(id);
+  setConfirmDel(null);
+  refreshEvents();
+};
 
   const panelEvents = showAll ? allSorted : dayEvents;
   const panelTitle  = showAll

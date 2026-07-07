@@ -7,7 +7,7 @@
  *   const { events: all }            = useEvents({ month: "2026-05" });
  */
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback  } from "react";
 
 const BASE = "/api/events";
 
@@ -16,7 +16,36 @@ export function useEvents(params = {}) {
   const [loading, setLoading] = useState(true);
   const [error,   setError]   = useState(null);
 
+  const fetchEvents = useCallback(async () => {
+    const url = new URL(BASE, window.location.origin);
+    Object.entries(params).forEach(([k, v]) => {
+      if (v) url.searchParams.set(k, v);
+    });
+
+    setLoading(true);
+    setError(null);
+
+    try {
+      const r = await fetch(url.toString());
+      const json = await r.json();
+
+      if (json.ok) {
+        setEvents(json.data);
+      } else {
+        setError(json.error ?? "Error desconocido");
+      }
+    } catch (e) {
+      setError(e.message);
+    } finally {
+      setLoading(false);
+    }
+  }, [JSON.stringify(params)]);
+
   useEffect(() => {
+    fetchEvents();
+  }, [fetchEvents]);
+
+  /*useEffect(() => {
     const url = new URL(BASE, window.location.origin);
     Object.entries(params).forEach(([k, v]) => v && url.searchParams.set(k, v));
 
@@ -35,9 +64,14 @@ export function useEvents(params = {}) {
       .finally(()  => { if (!cancelled) setLoading(false); });
 
     return () => { cancelled = true; };
-  }, [JSON.stringify(params)]);
+  }, [JSON.stringify(params)]);*/
 
-  return { events, loading, error };
+  return {
+    events,
+    loading,
+    error,
+    refetch: fetchEvents,
+  };
 }
 
 // ─── Helpers de escritura ─────────────────────────────────────────────────────
