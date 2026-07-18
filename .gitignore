@@ -9,6 +9,7 @@ build/
 db/
 .wrangler/
 .DS_Store
+.claude/
 
 # Logs
 *.log
