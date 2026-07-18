@@ -26,8 +26,7 @@ const Welcome = () => {
           <img
             src="https://images.unsplash.com/photo-1511632765486-a01980e01a18?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80"
             alt="Comunidad CFCB"
-            className="relative rounded-2xl shadow-xl z-10 w-full object-cover"
-            style={{ height: 500, filter: "grayscale(0.2)" }}
+            className="relative lg:h-125 md:h-80 sm:h-50 grayscale-[0.2] rounded-2xl shadow-xl z-10 w-full object-cover"
           />
           <div className="absolute -bottom-6 -right-6 bg-white p-4 rounded-xl shadow-lg z-20 max-w-50 border border-slate-100 hidden md:block">
             <div className="flex items-center gap-3">
