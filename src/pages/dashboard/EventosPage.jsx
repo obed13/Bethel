@@ -11,12 +11,16 @@ const MONTHS     = ["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Ag
 const DAYS_SHORT = ["Lu","Ma","Mi","Ju","Vi","Sá","Do"];
 
 const CATEGORIES = [
-  { key: "culto",     label: "Culto"     },
-  { key: "jovenes",   label: "Jóvenes"   },
-  { key: "mujeres",   label: "Mujeres"   },
+  { key: "todos",     label: "Todos"     },
+  { key: "culto",     label: "Cultos"    },
+  { key: "jovenes",   label: "Jóvenes"  },
+  { key: "damas",   label: "Damas"  },
   { key: "liderazgo", label: "Liderazgo" },
-  { key: "panderistas",       label: "Panderistas"       },
-  { key: "oracion",   label: "Oración"   },
+  { key: "panderista", label: "Panderistas"},
+  { key: "oracion",   label: "Oración"  },
+  { key: "alabanza",   label: "Alabanza"  },
+  { key: "evento",   label: "Evento"  },
+  { key: "clases",   label: "Clases Biblicas"  },
 ];
 
 const BADGE = {
@@ -26,6 +30,9 @@ const BADGE = {
   liderazgo: "bg-emerald-100 text-emerald-800",
   panderistas: "bg-violet-100 text-violet-800",
   oracion:   "bg-green-100 text-green-800",
+  alabanza:   "bg-yellow-100 text-yellow-800",
+  evento:   "bg-red-100 text-red-800",
+  clases:   "bg-blue-100 text-blue-800",
 };
 
 const EMPTY_FORM = {
